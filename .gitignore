@@ -1,0 +1,22 @@
+*.aux
+*.fdb_*
+*.fls
+*.log
+*.out
+*.pdf
+*.toc
+*.gz
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.lof
+*.lot
+*.upa
+*.upb
+# latex bib files
+*.bbl
+*.blg
+*.run.xml
+*-blx.bib

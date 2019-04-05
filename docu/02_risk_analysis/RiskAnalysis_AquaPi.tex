@@ -1,0 +1,165 @@
+\documentclass{../../git_submodules/common_docu/doc_class}
+\input{../latex_common/latex_project.tex}
+  
+\author{\defaultAuthor}
+\date{2019-04-04}
+\project{\ThisProjectName}
+%\projectsub{subproject} % i.e. "GUI"
+\doctitle{Risk Analysis}
+\projectversion{1.0}
+ 
+\begin{document}
+  
+  \section{Purpose}
+  The purpose of this document is o identify and to evaluate possible risks, to define appropriate risk mitigation measures and to gain awareness about the amount of remaining risk.
+  
+  The Risk Analysis thus is a major input document for the entire project development.
+  
+  \subsection{Scope}
+  Subject of this document is the project \textit{\ThisProjectName}. \\
+  A brief project description and the intended use of \ThisProjectName~can be obtained from the corresponding project description document.
+  \newpage
+  
+  \section{Risk definitions}
+
+  \subsection{Severity (extend of damage)}
+  Concerning risk severity it has to taken into account that \ThisProjectName~ controls an aquarium and risks therefore may apply to 
+  \begin{itemize}
+    \item persons -- user(s) and third party persons,
+    \item animals -- inside the aquarium,
+    \item material values -- e.g. the aquarium itself, aquarium devices, environment, \dots.
+  \end{itemize}
+  
+  \begin{table}[H]
+    \begin{tabularx}{\textwidth}{|ll|X|}
+      \hline
+      \multicolumn{2}{|l|}{\CellGray{Severity}} & \CellGray{Definition} \\
+      \hline
+      \CellGray{1} & \CellGray{insignificant} & Persons: Inconvenience or temporary discomfort. \newline
+      Animals: Self-healing injury or impairment. \newline
+      Material values: Loss of value \textless{} 1 \euro. \\
+      \hline
+      \CellGray{2} & \CellGray{minor} & Persons: Injury or impairment not requiring medical intervention. \newline
+      Animals: Irreversible injury or impairment.\newline
+      Material values: Loss of value \textgreater= 1 \euro{} .. \textless{} 10 \euro. \\
+      \hline
+      \CellGray{4} & \CellGray{moderate} & Persons: Injury or impairment requiring medical intervention. \newline
+      Animals: Death of one animal. \newline
+      Material values: Loss of value \textgreater= 10 \euro{} .. \textless{} 100 \euro. \\
+      \hline
+      \CellGray{8} & \CellGray{serious} & Persons: Injury or impairment requiring professional medical intervention. \newline
+      Animals: Death of several animals. \newline
+      Material values: Loss of value \textgreater= 100 \euro. \\
+      \hline
+      \CellGray{16} & \CellGray{critical} & Persons: Permanent impairment or life-threatening injury. \\
+      \hline
+      \CellGray{32} & \CellGray{catastrophic} & Persons: Death.\\
+      \hline
+    \end{tabularx}
+    \caption{Definition of risk severities}
+  \end{table}
+
+\ProbabilityInconceivable{140000}
+\ProbabilityImprobable{70000}
+\ProbabilityRemotelyPossible{20000}
+\ProbabilityOccasional{2000}
+\ProbabilityProbable{200}
+\ProbabilityFrequently{20}
+\ActionsPerDay{20}
+\YearsLifeTime{10}
+
+\subsection{Probability of occurrence}
+
+\ThisProjectName~ controls various aquarium devices by activating/deactivating relay switches following user configurable schedules.\\
+It is reasonable to assume that any aquarium device is activated once and deactivated once per day.
+
+Since 8 relays can be controlled, plus possibly a few further devices controlled using PWM or GPIO outputs of the Raspberry Pi, it is assumed that \NumActionsPerDay~risk related \textit{actions} per day will be performed.\\
+In \NumYearsLifeTime~ years of expected device lifetime that makes a total \FPeval{\result}{clip(\NumYearsLifeTime * 365 * \NumActionsPerDay)}\result~actions.
+
+The graduation of risk probabilities is chosen such way, that a \textit{inconceivable} risk clearly will not occur during the expected device time while a \textit{frequently} risk will occur once a day.
+
+
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{|lp{0.2\textwidth}|X|X|X|}
+    \hline
+      \multicolumn{2}{|l|}{\CellGray{Probability}} & \CellGray{Probability of harm per action} & \CellGray{Probability of harm per lifetime and device} &
+      \CellGray{Mean time between harm (days)} \\
+    \hline
+      \CellGray{1} & \CellGray{inconceivable} & 
+      $\leq$ 1 : \NumProbabilityInconceivable & 
+      $\leq$ \FPeval{\result}{round(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityInconceivable,2)}\result &
+      \FPeval{\result}{clip(\NumProbabilityInconceivable / \NumActionsPerDay)}\result~\scriptsize{(not in lifetime)} \\
+    \hline
+      \CellGray{3} & \CellGray{improbable} & 
+      $\leq$ 1 : \NumProbabilityImprobable & 
+      $\leq$ \FPeval{\result}{round(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityImprobable,2)}\result &
+      \FPeval{\result}{clip(\NumProbabilityImprobable / \NumActionsPerDay)}\result~\scriptsize{(once in lifetime)} \\
+    \hline
+      \CellGray{5} & \CellGray{remotely possible} & 
+      $\leq$ 1 : \NumProbabilityRemotelyPossible & 
+      $\leq$ \FPeval{\result}{round(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityRemotelyPossible,1)}\result &
+      \FPeval{\result}{clip(\NumProbabilityRemotelyPossible / \NumActionsPerDay)}\result~\scriptsize{(every few years)} \\
+    \hline
+      \CellGray{9} & \CellGray{occasional} & 
+      $\leq$ 1 : \NumProbabilityOccasional & 
+      $\leq$ \FPeval{\result}{clip(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityOccasional)}\result &
+      \FPeval{\result}{clip(\NumProbabilityOccasional / \NumActionsPerDay)}\result~\scriptsize{(every few months)} \\
+    \hline
+      \CellGray{17} & \CellGray{probable} & 
+      $\leq$ 1 : \NumProbabilityProbable & 
+      $\leq$ \FPeval{\result}{clip(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityProbable)}\result &
+      \FPeval{\result}{clip(\NumProbabilityProbable / \NumActionsPerDay)}\result~\scriptsize{(every few days)} \\
+    \hline
+      \CellGray{33} & \CellGray{frequently} & 
+      $>$ 1 : \NumProbabilityFrequently & 
+      $>$ \FPeval{\result}{clip(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityFrequently)}\result &
+      \FPeval{\result}{clip(\NumProbabilityFrequently / \NumActionsPerDay)}\result~\scriptsize{(daily)} \\
+    \hline
+  \end{tabularx}
+  \caption{Definition of risk probabilities}
+\end{table}
+
+Parameters used for calculation:
+\begin{itemize}
+  \item \NumActionsPerDay~actions per day
+  \item \NumYearsLifeTime~years device lifetime
+\end{itemize}
+
+\subsection{Risk acceptance}
+
+\begin{table}[H]
+  \begin{tabular}{l>{\small}l|c|c|c|c|c|c|}
+    \cline{3-8}
+    \multicolumn{2}{l|}{\multirow{2}{*}{}} & \multicolumn{6}{c|}{\textbf{Severity}} \\ %\cline{3-78 
+    \multicolumn{2}{l|}{} & \small{insignificant} &\small{ minor} & \small{moderate} & \small{serious} & \small{critical} & \small{catastrophic} \\ \hline
+    \multicolumn{1}{|c}{\multirow{6}{*}{\textbf{Probability}}} & frequently & 
+    \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+    \multicolumn{1}{|l}{} & probably & 
+    \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+    \multicolumn{1}{|l}{} & occasionally & 
+    \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+    \multicolumn{1}{|l}{} & remotely possible & 
+    \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+    \multicolumn{1}{|l}{} & improbable & 
+    \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+    \multicolumn{1}{|l}{} & inconceivable & 
+    \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} \\ \hline
+  \end{tabular}
+  \caption{Risk acceptance matrix}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \cellcolor{colorRiskRed} ~ \newline ~ \newline \textbf{RISK NOT ACCEPTED} & These risks are generally not accepted. \newline If any residual risk of this kind remains, \ThisProjectName~will not be installed.\\
+    \hline
+    \cellcolor{colorRiskYellow} ~ \newline ~ \newline \textbf{RISK ACCEPTED} & The remaining risks are accepted when the following aspects have been considered:\small\newline
+    - risks have been reduced as much as possible regardless of severity or probability\newline
+    - further risk mitigation measures could not increase the safety of the product \\
+    \hline
+  \end{tabularx}
+\end{table}
+  
+  
+\end{document}

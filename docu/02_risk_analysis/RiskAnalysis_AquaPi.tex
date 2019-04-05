@@ -33,27 +33,27 @@
   \begin{table}[H]
     \begin{tabularx}{\textwidth}{|ll|X|}
       \hline
-      \multicolumn{2}{|l|}{\CellGray{Severity}} & \CellGray{Definition} \\
+      \multicolumn{2}{|l|}{\textbf{Severity}} & \textbf{Definition} \\
       \hline
-      \CellGray{1} & \CellGray{insignificant} & Persons: Inconvenience or temporary discomfort. \newline
+      \textbf{1} & \textbf{insignificant} & Persons: Inconvenience or temporary discomfort. \newline
       Animals: Self-healing injury or impairment. \newline
       Material values: Loss of value \textless{} 1 \euro. \\
       \hline
-      \CellGray{2} & \CellGray{minor} & Persons: Injury or impairment not requiring medical intervention. \newline
+      \textbf{2} & \textbf{minor} & Persons: Injury or impairment not requiring medical intervention. \newline
       Animals: Irreversible injury or impairment.\newline
       Material values: Loss of value \textgreater= 1 \euro{} .. \textless{} 10 \euro. \\
       \hline
-      \CellGray{4} & \CellGray{moderate} & Persons: Injury or impairment requiring medical intervention. \newline
+      \textbf{4} & \textbf{moderate} & Persons: Injury or impairment requiring medical intervention. \newline
       Animals: Death of one animal. \newline
       Material values: Loss of value \textgreater= 10 \euro{} .. \textless{} 100 \euro. \\
       \hline
-      \CellGray{8} & \CellGray{serious} & Persons: Injury or impairment requiring professional medical intervention. \newline
+      \textbf{8} & \textbf{serious} & Persons: Injury or impairment requiring professional medical intervention. \newline
       Animals: Death of several animals. \newline
       Material values: Loss of value \textgreater= 100 \euro. \\
       \hline
-      \CellGray{16} & \CellGray{critical} & Persons: Permanent impairment or life-threatening injury. \\
+      \textbf{16} & \textbf{critical} & Persons: Permanent impairment or life-threatening injury. \\
       \hline
-      \CellGray{32} & \CellGray{catastrophic} & Persons: Death.\\
+      \textbf{32} & \textbf{catastrophic} & Persons: Death.\\
       \hline
     \end{tabularx}
     \caption{Definition of risk severities}
@@ -82,35 +82,35 @@ The graduation of risk probabilities is chosen such way, that a \textit{inconcei
 \begin{table}[H]
   \begin{tabularx}{\textwidth}{|lp{0.2\textwidth}|X|X|X|}
     \hline
-      \multicolumn{2}{|l|}{\CellGray{Probability}} & \CellGray{Probability of harm per action} & \CellGray{Probability of harm per lifetime and device} &
-      \CellGray{Mean time between harm (days)} \\
+      \multicolumn{2}{|l|}{\textbf{Probability}} & \textbf{Probability of harm per action} & \textbf{Probability of harm per lifetime and device} &
+      \textbf{Mean time between harm (days)} \\
     \hline
-      \CellGray{1} & \CellGray{inconceivable} & 
+      \textbf{1} & \textbf{inconceivable} & 
       $\leq$ 1 : \NumProbabilityInconceivable & 
       $\leq$ \FPeval{\result}{round(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityInconceivable,2)}\result &
       \FPeval{\result}{clip(\NumProbabilityInconceivable / \NumActionsPerDay)}\result~\scriptsize{(not in lifetime)} \\
     \hline
-      \CellGray{3} & \CellGray{improbable} & 
+      \textbf{3} & \textbf{improbable} & 
       $\leq$ 1 : \NumProbabilityImprobable & 
       $\leq$ \FPeval{\result}{round(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityImprobable,2)}\result &
       \FPeval{\result}{clip(\NumProbabilityImprobable / \NumActionsPerDay)}\result~\scriptsize{(once in lifetime)} \\
     \hline
-      \CellGray{5} & \CellGray{remotely possible} & 
+      \textbf{5} & \textbf{remotely possible} & 
       $\leq$ 1 : \NumProbabilityRemotelyPossible & 
       $\leq$ \FPeval{\result}{round(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityRemotelyPossible,1)}\result &
       \FPeval{\result}{clip(\NumProbabilityRemotelyPossible / \NumActionsPerDay)}\result~\scriptsize{(every few years)} \\
     \hline
-      \CellGray{9} & \CellGray{occasional} & 
+      \textbf{9} & \textbf{occasional} & 
       $\leq$ 1 : \NumProbabilityOccasional & 
       $\leq$ \FPeval{\result}{clip(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityOccasional)}\result &
       \FPeval{\result}{clip(\NumProbabilityOccasional / \NumActionsPerDay)}\result~\scriptsize{(every few months)} \\
     \hline
-      \CellGray{17} & \CellGray{probable} & 
+      \textbf{17} & \textbf{probable} & 
       $\leq$ 1 : \NumProbabilityProbable & 
       $\leq$ \FPeval{\result}{clip(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityProbable)}\result &
       \FPeval{\result}{clip(\NumProbabilityProbable / \NumActionsPerDay)}\result~\scriptsize{(every few days)} \\
     \hline
-      \CellGray{33} & \CellGray{frequently} & 
+      \textbf{33} & \textbf{frequently} & 
       $>$ 1 : \NumProbabilityFrequently & 
       $>$ \FPeval{\result}{clip(365.0 * \NumYearsLifeTime * \NumActionsPerDay / \NumProbabilityFrequently)}\result &
       \FPeval{\result}{clip(\NumProbabilityFrequently / \NumActionsPerDay)}\result~\scriptsize{(daily)} \\
@@ -129,9 +129,10 @@ Parameters used for calculation:
 
 \begin{table}[H]
   \begin{tabular}{l>{\small}l|c|c|c|c|c|c|}
-    \cline{3-8}
+%    \cline{3-8}
+	\hhline{~~------}
     \multicolumn{2}{l|}{\multirow{2}{*}{}} & \multicolumn{6}{c|}{\textbf{Severity}} \\ %\cline{3-78 
-    \multicolumn{2}{l|}{} & \small{insignificant} &\small{ minor} & \small{moderate} & \small{serious} & \small{critical} & \small{catastrophic} \\ \hline
+    \multicolumn{2}{l|}{} & \small{insignificant} & \small{ minor} & \small{moderate} & \small{serious} & \small{critical} & \small{catastrophic} \\ \hline
     \multicolumn{1}{|c}{\multirow{6}{*}{\textbf{Probability}}} & frequently & 
     \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
     \multicolumn{1}{|l}{} & probably & 

@@ -19,17 +19,17 @@ CGI_FILES=\
 	$(CODE_ROOT)/aquaRequest/aquaRequest.cgi
 
 HTTP_DIRECTORIES=\
-	$(CODE_ROOT)/htdocs/jquery/scheduler/*
-	$(CODE_ROOT)/htdocs/jquery/*
-	$(CODE_ROOT)/htdocs/js/*
-	$(CODE_ROOT)/htdocs/css/*
-	$(CODE_ROOT)/htdocs/images/*
-	$(CODE_ROOT)/htdocs/ico/*
+	$(CODE_ROOT)/htdocs/jquery/scheduler/* \
+	$(CODE_ROOT)/htdocs/jquery/* \
+	$(CODE_ROOT)/htdocs/js/* \
+	$(CODE_ROOT)/htdocs/css/* \
+	$(CODE_ROOT)/htdocs/images/* \
+	$(CODE_ROOT)/htdocs/ico/* \
 
 HTTP_FILES=\
-	$(CODE_ROOT)/htdocs/schedule*.html
-	$(CODE_ROOT)/htdocs/imageshow.txt
-	$(CODE_ROOT)/htdocs/index.php
+	$(CODE_ROOT)/htdocs/schedule*.html \
+	$(CODE_ROOT)/htdocs/imageshow.txt \
+	$(CODE_ROOT)/htdocs/index.php \
 	$(CODE_ROOT)/htdocs/languages.xml
 
 .DEFAULT_GOAL := qprojects
@@ -41,7 +41,7 @@ HTTP_FILES=\
 #
 docu:
 	@echo '#########################################'
-	@echo Building documentation:
+	@echo Building documentation
 	@for i in $(LIST_OF_DOCS); do echo " " $$i; done
 	@for i in $(LIST_OF_DOCS); do $(MAKE) -C $$i; done
 	@echo '-----------------------------------------'
@@ -55,7 +55,7 @@ docu:
 
 qprojects:
 	@echo '#########################################'
-	@echo Building Qt projects:
+	@echo Building Qt projects
 	@for i in $(LIST_OF_QPROJECTS); do echo "  Building " $$i && cd $(current_dir) && cd $$i && qmake && make && echo '-----------------------------------------' done
 	@cd $(current_dir)
 	@echo '#########################################'
@@ -68,14 +68,14 @@ clean:
 
 install:
 	@echo '#########################################'
-	@echo 'OVERWRITING CGI:'
+	@echo 'OVERWRITING CGI'
 	@for i in $(CGI_FILES); do sudo cp $$i /usr/lib/cgi-bin/; done
 	@sudo chown www-data:www-data /usr/lib/cgi-bin/*.cgi
 	@echo '-----------------------------------------'
-	@echo 'OVERWRITING WEB APPLICATION:'
+	@echo 'OVERWRITING WEB APPLICATION'
 	@for i in $(HTTP_DIRECTORIES); do sudo cp -R $$i /var/www/; done
 	@for i in $(HTTP_FILES); do sudo cp -R $$i /var/www/; done
-	sudo chown -R www-data:www-data /var/www/
+	@sudo chown -R www-data:www-data /var/www/
 	@echo '#########################################'
 
 #cd ~/AquarPi/code/htdocs

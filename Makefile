@@ -7,7 +7,7 @@ LIST_OF_DOCS= \
 	$(DOC_ROOT)/01_project_description \
 	$(DOC_ROOT)/02_risk_analysis
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := aquaBackend
 
 .PHONY: all docu clean
 
@@ -28,7 +28,15 @@ docu:
 	@ls -1 $(DOCU_OUT_DIR)
 	@echo "--------------"
 
-all: docu 
+aquaBackend:
+	@echo "--------------"
+	@echo Building backend:
+	cd code/aquaBackend
+	qmake
+	$(MAKE)
+	cd ../..
+
+all: docu aquaBackend
 
 clean:
 	for i in $(LIST_OF_DOCS); do $(MAKE) clean -C $$i; done

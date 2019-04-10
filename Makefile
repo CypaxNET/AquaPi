@@ -60,7 +60,7 @@ clean:
 install:
 	@echo '#########################################'
 	@echo 'OVERWRITING CGI'
-	@for i in $(LIST_OF_CGI_FILES); do sudo cp $$i $(CGI_TARGET_DIR)/; done
+	@for i in $(LIST_OF_CGI_FILES); do echo "Copying " $$i && sudo cp $$i $(CGI_TARGET_DIR)/; done
 	@sudo chown www-data:www-data $(CGI_TARGET_DIR)/*.cgi
 	@echo '-----------------------------------------'
 	@echo 'OVERWRITING WEB APPLICATION'

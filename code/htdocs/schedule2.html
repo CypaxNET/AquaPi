@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--
+File identification:			$Id: schedule2.html 50 2017-12-13 16:35:37Z cypax $
+Revision of last commit:	$Rev: 50 $
+Author of last commit:		$Author: cypax $
+Date of last commit:			$Date: 2017-12-13 17:35:37 +0100 (Mi, 13 Dez 2017) $
+@file index.html
+@brief Aquarium web application
+@author Philipp Bank
+-->
+<html>
+	
+<head>
+	<title>Aquarium</title>
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="./ico/favicon.ico">
+
+	<!-- jQuery CSS -->
+	<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.css">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="css/aquarium.css">
+
+	<!-- jQuery includes -->
+	<script src="jquery/jquery.js"></script>
+	<script src="jquery/jquery.mobile-1.4.5.js"></script>
+
+	<!-- jQuery Scheduler -->
+	<script src="jquery/scheduler/jquery.weekly-schedule-plugin.js"></script>	
+
+	<!-- jQuery plugins -->
+	<script src="jquery/jquery-bigtext.js"></script>
+	<script src="jquery/jquery.cookie.js"></script>	
+
+	<!-- Custom JS -->
+	<script src="js/aquarium.js"></script>
+
+	<script type="text/javascript" language="javascript">
+
+	needToResize = true;
+	var resizeTimer;
+
+	$(document).ready(function(){
+		console.log("document ready");
+		setLanguage($.cookie("language") == null ? "English" : $.cookie("language"));
+	});
+
+	$(window).trigger('resize');
+
+	$(document).one("pagecreate", "#page_schedule", function() {
+		// Remove the popup after it has been closed to manage DOM size
+		$(document).on( "popupafterclose", ".ui-popup", function() {
+				$(this).remove();
+		});
+	});
+	
+	function doResize()
+	{
+		$(".autosize").bigText({fontSizeFactor: 0.6});
+
+		$(".autosize_r").bigText({
+				horizontalAlign: "right",
+				fontSizeFactor: 0.7,
+		});
+
+		$(".autosize_l").bigText({
+				horizontalAlign: "left",
+				fontSizeFactor: 0.7,
+		});
+		
+	}
+
+	$(window).resize(function (){
+		console.log("window.resize()");
+		needToResize = true;
+		if (resizeTimer)
+			clearTimeout(resizeTimer);
+		
+		resizeTimer = window.setTimeout(doResize, 500);
+	});
+
+	//$(window).resize();
+
+	$(document).one("pageshow","body",function(){
+		$('.languageSelector').on("click",function(){
+			setLanguage($(this).text());
+			// since the length of texts is now probably different we need to set the resize flag
+			needToResize = true;
+		});
+
+	});
+	
+	
+	function importSchedule()
+	{
+		$.ajax({
+			type:'get', url:'cgi-bin/aquaRequest.cgi?request=getRelaySchedule2', 
+			success:function(data) {
+				$("#schedule").weekly_schedule("setSelectedHour"+data); 
+			}
+		});
+	}	
+
+	importSchedule();
+	setInterval(importSchedule, 10000);
+
+	</script>
+
+</head>
+
+<body>
+
+<!-- schedule page -->
+<!-- ############################################################################################################################# -->
+<!-- ############################################################################################################################# -->
+<div data-role="page" class="schedule-menupage swipepage" id="page_schedule2" data-theme="b">
+
+	<div data-role="header">
+		<div data-role="navbar">
+			<ul>
+				<li><a rel="external" href="index.php#page_relays" class="text-0030">BACK</a></li>
+				<li><a href="#popupMenu" class="text-0042 ui-btn-active" data-rel="popup">OUTLET_1</a></li>
+			</ul>		
+		</div>
+	</div><!-- /header -->
+	
+<div data-role="popup" id="popupMenu">
+	<ul data-role="listview" data-inset="true" style="min-width:210px;">
+		<li><a rel="external" href="schedule0.html" class="text-0040 click-button ui-mini ui-btn-inline ui-btn">OUTLET_1</a></li>
+		<li><a rel="external" href="schedule1.html" class="text-0041 click-button ui-mini ui-btn-inline ui-btn">OUTLET_2</a></li>
+		<li><a href="#" class="text-0042 click-button ui-mini ui-btn-inline ui-btn ui-btn-active">OUTLET_3</a></li>
+		<li><a rel="external" href="schedule3.html" class="text-0043 click-button ui-mini ui-btn-inline ui-btn">OUTLET_4</a></li>
+		<li><a rel="external" href="schedule4.html" class="text-0044 click-button ui-mini ui-btn-inline ui-btn">OUTLET_5</a></li>
+		<li><a rel="external" href="schedule5.html" class="text-0045 click-button ui-mini ui-btn-inline ui-btn">OUTLET_6</a></li>
+		<li><a rel="external" href="schedule6.html" class="text-0046 click-button ui-mini ui-btn-inline ui-btn">OUTLET_7</a></li>
+		<li><a rel="external" href="schedule7.html" class="text-0047 click-button ui-mini ui-btn-inline ui-btn">OUTLET_8</a></li>
+	</ul>
+</div>
+
+	<div role="main" class="ui-content">
+		<h1><span class="text-0029">TIMER CLOCK</span><span>&nbsp;-&nbsp;</span><span class="text-0042">OUTLET</span></h1>
+		<div id="schedule" class="scheduler" style="background-color:#333;"></div>
+		<script>
+			$('#schedule').weekly_schedule({
+				days: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], // Days displayed
+				hours: "00:00-23:00", // Hours displyed
+				fontFamily: "sans-serif", // Font used in the component
+				fontColor: "#fff", // Font color used in the component
+				fontWeight: "100", // Font weight used in the component
+				fontSize: "0.8em", // Font size used in the component
+				hoverColor: "#727bad", // Background color when hovered
+				selectionColor: "#22aadd", // Background color when selected
+				headerBackgroundColor: "transparent", // Background color of headers
+				selection: "000000000000000000000000,000000000000000000000000,000000000000000000000000,000000000000000000000000,000000000000000000000000,000000000000000000000000,000000000000000000000000"
+			});
+			
+			$('#schedule').on('selectionmade', function() {
+				scheduleString = $("#schedule").weekly_schedule("getSelectedHour");
+				$.ajax({
+					type:'get',
+					url:'cgi-bin/aquaRequest.cgi?request=setRelaySchedule2|'+scheduleString,
+					success:function(data) {
+					}
+				});
+				
+			}).on('selectionremoved', function() {
+				scheduleString = $("#schedule").weekly_schedule("getSelectedHour");
+				$.ajax({
+					type:'get',
+					url:'cgi-bin/aquaRequest.cgi?request=setRelaySchedule2|'+scheduleString,
+					success:function(data) {
+					}
+				});
+				
+			});
+		</script>
+
+			
+	</div><!-- /content -->
+
+</div><!-- /schedule page -->
+
+
+</body>
+</html>

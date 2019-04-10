@@ -1,0 +1,5 @@
+images/slideshow/slide3.jpg|<b>Indischer Zwergkugelfisch</b><p><i>Carinotetraodon travancoricus</i></p><p>Ein aktiver und sehr kleiner Kugelfisch, der in Indien und Siri Lanka beheimatet ist.<br/>Er geh&ouml;rt zu den kleinsten Vertretern seiner Art und erreicht eine Gesamtl&auml;nge von drei bis vier Zentimeter.</p>
+images/slideshow/slide1.jpg|<p>Er lebt  vor allem in krautigen T&uuml;mpeln.</p><p>Die Wassertemperaturen in seinem nat&uuml;rlichen Biotop schwanken von 25 &deg;C bis &uuml;ber 33 &deg;C.</p><p>Der pH-Wert liegt im Bereich von 6,5 bis 7,0.</p>
+images/slideshow/slide2.jpg|<b>Haltung:</b><p>Gruppenfisch f&uuml;r locker bepflanzte Aquarien mit feinkiesigem Bodengrund.</p>
+images/slideshow/slide5.jpg|Im Aquarium sollte immer f&uuml;r ausreichend Schnecken gesorgt werden.
+images/slideshow/slide4.jpg|Auch rote M&uuml;ckenlarven werden gerne gefressen.

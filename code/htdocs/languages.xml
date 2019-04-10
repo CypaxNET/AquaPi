@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<translations>
+    <translation id="text-0501">
+        <English>Language</English>
+        <Deutsch>Sprache</Deutsch>
+        <thlIngan_Hol>Hol</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0502">
+        <English>Images</English>
+        <Deutsch>Bilder</Deutsch>
+        <thlIngan_Hol>mIlloghmey</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0503">
+        <English>Relays</English>
+        <Deutsch>Relais</Deutsch>
+        <thlIngan_Hol>leQmey</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0504">
+        <English>Help</English>
+        <Deutsch>Hilfe</Deutsch>
+        <thlIngan_Hol>QaH</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0505">
+        <English>State</English>
+        <Deutsch>Status</Deutsch>
+        <thlIngan_Hol>Dotlh</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0506">
+        <English>Camera</English>
+        <Deutsch>Kamera</Deutsch>
+        <thlIngan_Hol>mIllogh qonwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0003">
+        <English>Version</English>
+        <Deutsch>Version</Deutsch>
+        <thlIngan_Hol>jan mI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0005">
+        <English>Temperature</English>
+        <Deutsch>Temperatur</Deutsch>
+        <thlIngan_Hol>Hat</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0007">
+        <English>Select language ...</English>
+        <Deutsch>Sprache wählen ...</Deutsch>
+        <thlIngan_Hol>wIv Hol ...</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0014">
+        <English>Feeding</English>
+        <Deutsch>Füttern</Deutsch>
+        <thlIngan_Hol>je'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0015">
+        <English>Maintenance</English>
+        <Deutsch>Wartung</Deutsch>
+        <thlIngan_Hol>leH</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0016">
+        <English>Normal</English>
+        <Deutsch>Normal</Deutsch>
+        <thlIngan_Hol>motlh Qap</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0022">
+        <English>GUI-Options</English>
+        <Deutsch>Anwendungsoptionen</Deutsch>
+        <thlIngan_Hol>jIHDuH</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0023">
+        <English>Sound</English>
+        <Deutsch>Audio</Deutsch>
+        <thlIngan_Hol>wab</thlIngan_Hol>
+    </translation>
+
+    <translation id="text-0027">
+        <English>Always ON</English>
+        <Deutsch>Immer AN</Deutsch>
+        <thlIngan_Hol>nab</thlIngan_Hol>
+    </translation>
+
+    <translation id="text-0028">
+        <English>Always OFF</English>
+        <Deutsch>Immer AUS</Deutsch>
+        <thlIngan_Hol>nab</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0029">
+        <English>Timer clock</English>
+        <Deutsch>Zeitschaltuhr</Deutsch>
+        <thlIngan_Hol>nab</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0030">
+        <English>Aquarium</English>
+        <Deutsch>Aquarium</Deutsch>
+        <thlIngan_Hol>biQngaSwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0036">
+        <English>???</English>
+        <Deutsch>???</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0040">
+        <English>Heater</English>
+        <Deutsch>Heizung</Deutsch>
+        <thlIngan_Hol>tujwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0041">
+        <English>Filtration pump</English>
+        <Deutsch>Filterpumpe</Deutsch>
+        <thlIngan_Hol>tlhoDbe'wi'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0042">
+        <English>Stream pump</English>
+        <Deutsch>Strömung</Deutsch>
+        <thlIngan_Hol>cheqmoHwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0043">
+        <English>Blubbler</English>
+        <Deutsch>Abschäumer</Deutsch>
+        <thlIngan_Hol>ba'SuqmoHwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0044">
+        <English>Light</English>
+        <Deutsch>Licht</Deutsch>
+        <thlIngan_Hol>wovmoHwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0045">
+        <English>Outlet 1</English>
+        <Deutsch>Steckdose 1</Deutsch>
+        <thlIngan_Hol>HoS 'och 1</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0046">
+        <English>Outlet 2</English>
+        <Deutsch>Steckdose 2</Deutsch>
+        <thlIngan_Hol>HoS 'och 2</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0047">
+        <English>Outlet 3</English>
+        <Deutsch>Steckdose 3</Deutsch>
+        <thlIngan_Hol>HoS 'och 3</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0050">
+        <English>Mo</English>
+        <Deutsch>Mo</Deutsch>
+        <thlIngan_Hol>jaj 1</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0051">
+        <English>Tu</English>
+        <Deutsch>Di</Deutsch>
+        <thlIngan_Hol>jaj 2</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0052">
+        <English>We</English>
+        <Deutsch>Mi</Deutsch>
+        <thlIngan_Hol>jaj 3</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0053">
+        <English>Th</English>
+        <Deutsch>Do</Deutsch>
+        <thlIngan_Hol>jaj 4</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0054">
+        <English>Fr</English>
+        <Deutsch>Fr</Deutsch>
+        <thlIngan_Hol>jaj 5</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0055">
+        <English>Sa</English>
+        <Deutsch>Sa</Deutsch>
+        <thlIngan_Hol>jaj 6</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0056">
+        <English>Su</English>
+        <Deutsch>So</Deutsch>
+        <thlIngan_Hol>jaj 7</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0123">
+        <English>Back</English>
+        <Deutsch>Zurück</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0301">
+        <English>Device is on.</English>
+        <Deutsch>Gerät ist an.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0302">
+        <English>Device is off.</English>
+        <Deutsch>Gerät ist aus.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0303">
+        <English>Temporary in this state until countdown expires.</English>
+        <Deutsch>Vorübergehend in diesem Zustand bis Zeitablauf.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0304">
+        <English>Device is always on.</English>
+        <Deutsch>Gerät ist immer an.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0305">
+        <English>Device is always off.</English>
+        <Deutsch>Gerät ist immer aus.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0306">
+        <English>Device is in schedule mode.</English>
+        <Deutsch>Gerät läuft nach Zeitschaltuhr.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0307">
+        <English>Device error. Check server connection.</English>
+        <Deutsch>Gerätefehler. Serververbindung prüfen.</Deutsch>
+        <thlIngan_Hol>???</thlIngan_Hol>
+    </translation>
+    
+</translations>

@@ -1,0 +1,449 @@
+/*!
+* File identification:			$Id: aquarium.css 45 2015-07-29 19:29:43Z	$
+* Revision of last commit:	$Rev: 128 $
+* Author of last commit:		$Author: cypax $
+* Date of last commit:			$Date: 2019-04-01 20:16:41 +0200 (Mo, 01 Apr 2019) $
+* @file aquarium.css
+* @brief Aquarium web application custom CSS.
+* @author Philipp Bank
+*/
+
+html, body	{
+	height:	100%;
+	width:	100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #000;
+}
+
+/*
+.ui-mobile [data-role="page"]	{
+	position:	absolute;
+	height:	100% !important;
+}
+
+.div[data-role="page"]	{
+	width:	100% !important;
+	height:	100% !important;
+}
+*/
+
+.ui-title {
+ font-weight:bold;
+}
+
+.ui-flipswitch-on:before {
+	content: url("../images/icons-svg/audio-white.svg");
+}
+
+.ui-flipswitch-off:after {
+	content: url("../images/icons-svg/audiooff-white.svg");
+}
+
+
+.aquarium-measurement-box {
+	color: #000;
+	background-color: #fff;
+	width: 100%;
+}
+
+#aquarium-measurement-indication {
+	color: #000;
+	background-color: #fff;
+	margin: 0;
+}
+
+.aquarium-value {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 0;
+}
+
+.aquarium-unit {
+	font-weight: bold;
+	font-size: 0.8em;
+	margin: 0;
+}
+
+/*
+.fixed-footer	{
+	width: 100%;
+	position:	fixed !important;
+	bottom: 0 !important;
+}
+*/
+
+.detector-popup {
+	width: 80% !important;
+	left: 10% !important;
+	right: 10% !important;
+}
+
+.popphoto {
+	float:left;
+	max-height: 160px !important;
+	margin-right: 1em;
+}
+
+.text-deviceserialnumber {
+	margin-left: 1em;
+}
+
+.devident {
+	margin: 0;
+}
+
+.posNegSlider span.ui-slider-label:nth-child(1) {
+	background-color: #0000AA !important;
+	border-color: #0000AA !important;
+	color: #fff !important;
+	text-shadow: 0px 1px 0px #08B !important;
+}
+
+.posNegSlider span.ui-slider-label:nth-child(2) {
+	background-color: #AA0000 !important;
+	border-color: #AA0000 !important;
+	color: #fff !important;
+	text-shadow: 0px 1px 0px #08B !important;
+}
+
+
+
+
+
+
+.schedule-rows td {
+  width: 80px;
+  height: 30px;
+  margin: 3px;
+  padding: 5px;
+  background-color: #eee;
+  cursor: pointer;
+}
+.schedule-rows td:first-child {
+  background-color: transparent;
+  text-align: right;
+  position: relative;
+  top: -12px;
+}
+.schedule-rows td[data-selected],
+.schedule-rows td[data-selecting] {
+  background-color: #22aadd;
+}
+.schedule-rows td[data-disabled] {
+  opacity: 0.55;
+}
+
+
+
+
+	
+/* Basic styles */
+.rwd-layout .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-layout p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-layout .ui-block-a,
+.rwd-layout .ui-block-b {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-layout > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-layout {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-layout .ui-body {
+       min-height: 14em;
+    }
+    .rwd-layout .ui-block-b {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-layout > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-layout > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-layout > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-layout .ui-body {
+       min-height: 18em;
+    }
+    .rwd-layout .ui-block-a {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-layout .ui-block-b {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-layout > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-layout > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 470px) {
+    .rwd-layout .ui-body {
+      font-size: 125%;
+    }
+    .rwd-layout .ui-block-a {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-layout .ui-block-b {
+      float: left;
+      width: 49.95%;
+    }
+}
+
+
+
+html,
+body,
+.ui-page {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.ui-page,
+.ui-page * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ui-page .ui-content {
+  height: inherit;
+}
+
+
+
+/*
+.ui-page {
+  display:flex !important;
+  flex-direction:column;
+  justify-content:space-evenly;
+  align-items:stretch;  
+}
+
+.ui-content {
+  flex-grow:1;
+}
+*/
+
+.ui-footer {
+  padding: 0 0.4em 0 0.4em;
+}
+
+.ul-outlet-state {
+	height: inherit;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul-outlet-state li {
+	height: 12.5%;
+	margin: 0;
+	margin-bottom: -1em;
+	margin-top: -1em;
+	padding-left: 1em;
+}
+
+.ul-outlet-state p {
+
+}
+
+.ul-outlet-state li:nth-child(odd) {
+	background: #333;
+}
+
+.ul-outlet-state li:nth-child(even) {
+	background: #222;
+}
+
+
+
+.table-outlet-state {
+	width: 100%;
+	height: inherit;
+	padding: 0;
+	margin: 0;	
+}
+
+.table-outlet-state tr {
+	padding: 0;
+	margin: 0;
+}
+
+.table-outlet-state tr:nth-child(odd) {
+	background: #2a2a2a;
+}
+
+.table-outlet-state tr:nth-child(even) {
+	background: #222;
+}
+
+.table-outlet-state th {
+	background: #111;
+	padding-right: 0.5em;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.table-outlet-state tr td p {
+	padding: 0;
+	margin: 0;
+	padding-left: 0.5em;
+}
+
+.table-outlet-state tr td .ui-controlgroup,
+.table-outlet-state tr td .ui-btn {
+	padding: 0 5px 0 5px;
+	margin: 0;
+	font-size: 1em;
+}
+
+.table-outlet-state th, .table-outlet-state td {
+  padding-left: 1em;
+}
+
+
+
+.img-outlet-state {
+	padding: 0;
+	margin: 0;
+	margin-left: 1em;
+	height: 1em;
+}
+
+
+
+.img-outlet-mode {
+	padding: 0;
+	margin: 0;
+	margin-left: 1em;
+	height: 1em;
+}
+
+.ui-dialog-contain {
+  width: 92.5% !important;
+  max-width: 800px !important;
+  margin: 4% auto 1em auto !important;
+}
+
+.ui-dialog {
+  background-image: url(../images/background.jpg) !important;
+  background-size: cover !important;
+}
+
+.ui-dialog td {
+  font-size: 0.9em;
+}
+
+.ui-dialog .ui-btn {
+  margin: 0.1em !important;
+}
+
+.flex-container {
+  display:flex;
+  flex-direction:row;
+  justify-content:space-evenly;
+  align-items:stretch;
+  padding:0;
+  text-shadow:none;
+  width:100%;
+}
+
+@media (orientation: portrait) { 
+  .flex-container {
+    flex-direction:column;
+  }
+}
+
+@media (orientation: landscape) { 
+  .flex-container {
+    flex-direction:row;
+  }
+}
+
+.imageshow-slide {
+    max-height: 100%;  
+    max-width: 100%; 
+    width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
+}
+
+.imageshow-text {
+  font-size: 0.9em;
+  margin: 0.5em;
+}
+.imageshow-text p {
+  color: #DDD;
+  line-height: 1.0;
+}
+
+.img-webcam {
+    width:100%;
+    height:100%;
+    object-fit: contain;
+}
+
+
+.ui-icon-stop:after {
+	background-image: url("../images/icons-svg/stop-white.svg");
+}
+.ui-icon-play:after {
+	background-image: url("../images/icons-svg/play-white.svg");
+}
+
+
+.ui-alt-icon.ui-icon-stop:after,
+.ui-alt-icon .ui-icon-stop:after {
+	background-image: url("../images/icons-svg/stop-black.svg");
+}
+.ui-nosvg .ui-icon-stop:after {
+	background-image: url("../images/icons-png/stop-white.png");
+}
+.ui-nosvg .ui-alt-icon.ui-icon-stop:after,
+.ui-nosvg .ui-alt-icon .ui-icon-stop:after {
+	background-image: url("../images/icons-png/stop-black.png");
+}
+
+.ui-nosvg .ui-alt-icon.ui-icon-play:after,
+.ui-nosvg .ui-alt-icon .ui-icon-play:after {
+	background-image: url("../images/icons-png/play-black.png");
+}
+.ui-nosvg .ui-icon-play:after {
+	background-image: url("../images/icons-png/play-white.png");
+}
+.ui-alt-icon.ui-icon-play:after,
+.ui-alt-icon .ui-icon-play:after {
+	background-image: url("../images/icons-svg/play-black.svg");
+}

@@ -54,7 +54,7 @@ clean:
 install:
 	@echo '#########################################'
 	@echo 'OVERWRITING CGI:'
-	@for i in $(CGI_OBJECTS); do cp $$i /usr/lib/cgi-bin/; done
+	@for i in $(CGI_OBJECTS); do sudo cp $$i /usr/lib/cgi-bin/; done
 	sudo chown www-data:www-data *.cgi
 
 #	cd ~/AquaPi/code/aquaRequest

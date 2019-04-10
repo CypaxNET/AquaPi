@@ -1,4 +1,5 @@
 DOC_ROOT=./docu
+CODE_ROOT=./code
 include makeconfig.mk
 
 DOCU_OUT_DIR=docu_output
@@ -7,7 +8,12 @@ LIST_OF_DOCS= \
 	$(DOC_ROOT)/01_project_description \
 	$(DOC_ROOT)/02_risk_analysis
 
-.DEFAULT_GOAL := aquaBackend
+LIST_OF_QPROJECTS= \
+	$(CODE_ROOT)/aquaBackend \
+	$(CODE_ROOT)/aquaRequest
+
+
+.DEFAULT_GOAL := qprojects
 
 .PHONY: all docu clean
 
@@ -28,15 +34,16 @@ docu:
 	@ls -1 $(DOCU_OUT_DIR)
 	@echo "--------------"
 
-aquaBackend:
+qprojects:
 	@echo "--------------"
-	@echo Building backend:
+	@echo Building Qt projects:
 	cd code/aquaBackend
-	qmake
-	$(MAKE)
-	cd ../..
+	@for i in $(LIST_OF_QPROJECTS); do echo " " $$i; done
+	@for i in $(LIST_OF_QPROJECTS); do qmake $$i; done
+	@for i in $(LIST_OF_QPROJECTS); do $(MAKE) -C $$i; done
+	@echo "--------------"
 
-all: docu aquaBackend
+all: qprojects docu
 
 clean:
 	for i in $(LIST_OF_DOCS); do $(MAKE) clean -C $$i; done

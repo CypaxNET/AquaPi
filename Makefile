@@ -17,10 +17,10 @@ LIST_OF_QPROJECTS= \
 	$(CODE_ROOT)/aquaBackend \
 	$(CODE_ROOT)/aquaRequest
 
-LIST_OF_HTDOC_DIRS=\
-	code/htdocs/*
+LIST_OF_HTDOC_DIRS= \
+	./code/htdocs/*
 
-LIST_OF_CGI_FILES=\
+LIST_OF_CGI_FILES= \
 	$(CODE_ROOT)/aquaRequest/aquaRequest.cgi
 
 .DEFAULT_GOAL := qprojects

@@ -1,7 +1,9 @@
 DOC_ROOT=./docu
 CODE_ROOT=./code
-HTDOC_DIR=./code/htdocs
-current_dir = $(PWD)
+CURRENT_DIR = $(PWD)
+
+WWW_TARGET_DIR=/var/www
+CGI_TARGET_DIR=/usr/lib/cgi-bin
 
 include makeconfig.mk
 
@@ -15,22 +17,11 @@ LIST_OF_QPROJECTS= \
 	$(CODE_ROOT)/aquaBackend \
 	$(CODE_ROOT)/aquaRequest
 
-CGI_FILES=\
+LIST_OF_HTDOC_DIRS=\
+	./code/htdocs/*
+
+LIST_OF_CGI_FILES=\
 	$(CODE_ROOT)/aquaRequest/aquaRequest.cgi
-
-HTTP_DIRECTORIES=\
-	jquery/scheduler/* \
-	jquery/* \
-	js/* \
-	css/* \
-	images/* \
-	ico/* \
-
-HTTP_FILES=\
-	schedule*.html \
-	imageshow.txt \
-	index.php \
-	languages.xml
 
 .DEFAULT_GOAL := qprojects
 
@@ -56,8 +47,8 @@ docu:
 qprojects:
 	@echo '#########################################'
 	@echo Building Qt projects
-	@for i in $(LIST_OF_QPROJECTS); do echo "  Building " $$i && cd $(current_dir) && cd $$i && qmake && make && echo '-----------------------------------------' done
-	@cd $(current_dir)
+	@for i in $(LIST_OF_QPROJECTS); do echo "  Building " $$i && cd $(CURRENT_DIR) && cd $$i && qmake && make && echo '-----------------------------------------' done
+	@cd $(CURRENT_DIR)
 	@echo '#########################################'
 
 all: qprojects docu
@@ -69,26 +60,10 @@ clean:
 install:
 	@echo '#########################################'
 	@echo 'OVERWRITING CGI'
-	@for i in $(CGI_FILES); do sudo cp $$i /usr/lib/cgi-bin/; done
-	@sudo chown www-data:www-data /usr/lib/cgi-bin/*.cgi
+	@for i in $(LIST_OF_CGI_FILES); do sudo cp $$i $(CGI_TARGET_DIR)/; done
+	@sudo chown www-data:www-data $(CGI_TARGET_DIR)/*.cgi
 	@echo '-----------------------------------------'
 	@echo 'OVERWRITING WEB APPLICATION'
-	@for i in $(HTTP_DIRECTORIES); do echo "Copying directory " $$i && sudo cp -R $(HTDOC_DIR)/$$i /var/www/; done
-	@for i in $(HTTP_FILES); do echo "Copying file " $$i && sudo cp $(HTDOC_DIR)/$$i /var/www/; done
-	@sudo chown -R www-data:www-data /var/www/
+	@for i in $(LIST_OF_HTDOC_DIRS); do echo "Copying " $$i && sudo cp -R $(HTDOC_DIR)/$$i $(WWW_TARGET_DIR)/; done
+	@sudo chown -R www-data:www-data $(WWW_TARGET_DIR)/
 	@echo '#########################################'
-
-#cd ~/AquarPi/code/htdocs
-#sudo cp -R jquery/scheduler/* /var/www/jquery/scheduler/
-#sudo cp -R jquery/* /var/www/jquery/
-#sudo cp -R js/* /var/www/js/
-#sudo cp -R css/* /var/www/css/
-#sudo cp -R images/* /var/www/images/
-#sudo cp -R ico/* /var/www/ico/
-#sudo cp schedule*.html /var/www/
-#sudo cp imageshow.txt /var/www/imageshow.txt
-#sudo cp index.php /var/www/index.php
-#sudo cp languages.xml /var/www/languages.xml
-#	cd ~/AquaPi/code/aquaRequest
-#	sudo cp aquaRequest.cgi /usr/lib/cgi-bin/aquaRequest.cgi
-#	sudo chown www-data:www-data /usr/lib/cgi-bin/aquaRequest.cgi

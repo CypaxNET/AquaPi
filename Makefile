@@ -55,7 +55,8 @@ install:
 	@echo '#########################################'
 	@echo 'OVERWRITING CGI:'
 	@for i in $(CGI_OBJECTS); do sudo cp $$i /usr/lib/cgi-bin/; done
-	sudo chown www-data:www-data *.cgi
+	@sudo chown www-data:www-data *.cgi
+	@echo '#########################################'
 
 #	cd ~/AquaPi/code/aquaRequest
 #	sudo cp aquaRequest.cgi /usr/lib/cgi-bin/aquaRequest.cgi

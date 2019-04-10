@@ -2,3 +2,6 @@
 	path = git_submodules/common_docu
 	url = https://github.com/CypaxNET/common_docu.git
 	branch = develop
+[submodule "wiringPi"]
+	path = wiringPi
+	url = git://git.drogon.net/wiringPi

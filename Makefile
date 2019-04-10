@@ -73,7 +73,9 @@ install:
 	@sudo chown www-data:www-data /usr/lib/cgi-bin/*.cgi
 	@echo '-----------------------------------------'
 	@echo 'OVERWRITING WEB APPLICATION'
-	@for i in $(HTTP_DIRECTORIES); do sudo cp -R $$i /var/www/; done
+	@for i in $(HTTP_DIRECTORIES); do echo "Copying directories " $$i; done
+	for i in $(HTTP_DIRECTORIES); do sudo cp -R $$i /var/www/; done
+	@for i in $(HTTP_FILES); do echo "Copying files " $$i; done
 	@for i in $(HTTP_FILES); do sudo cp -R $$i /var/www/; done
 	@sudo chown -R www-data:www-data /var/www/
 	@echo '#########################################'

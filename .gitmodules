@@ -5,3 +5,4 @@
 [submodule "git_submodules/wiringPi"]
 	path = git_submodules/wiringPi
 	url = git://git.drogon.net/wiringPi
+	branch = master

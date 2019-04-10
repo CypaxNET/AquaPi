@@ -37,7 +37,6 @@ docu:
 qprojects:
 	@echo "--------------"
 	@echo Building Qt projects:
-	cd code/aquaBackend
 	@for i in $(LIST_OF_QPROJECTS); do echo " " $$i; done
 	@for i in $(LIST_OF_QPROJECTS); do qmake $$i; done
 	@for i in $(LIST_OF_QPROJECTS); do $(MAKE) -C $$i; done

@@ -1,5 +1,6 @@
 DOC_ROOT=./docu
 CODE_ROOT=./code
+HTDOC_DIR=./code/htdocs
 current_dir = $(PWD)
 
 include makeconfig.mk
@@ -14,8 +15,22 @@ LIST_OF_QPROJECTS= \
 	$(CODE_ROOT)/aquaBackend \
 	$(CODE_ROOT)/aquaRequest
 
-CGI_OBJECTS=\
+CGI_FILES=\
 	$(CODE_ROOT)/aquaRequest/aquaRequest.cgi
+
+HTTP_DIRECTORIES=\
+	$(CODE_ROOT)/htdocs/jquery/scheduler/*
+	$(CODE_ROOT)/htdocs/jquery/*
+	$(CODE_ROOT)/htdocs/js/*
+	$(CODE_ROOT)/htdocs/css/*
+	$(CODE_ROOT)/htdocs/images/*
+	$(CODE_ROOT)/htdocs/ico/*
+
+HTTP_FILES=\
+	$(CODE_ROOT)/htdocs/schedule*.html
+	$(CODE_ROOT)/htdocs/imageshow.txt
+	$(CODE_ROOT)/htdocs/index.php
+	$(CODE_ROOT)/htdocs/languages.xml
 
 .DEFAULT_GOAL := qprojects
 
@@ -54,10 +69,26 @@ clean:
 install:
 	@echo '#########################################'
 	@echo 'OVERWRITING CGI:'
-	@for i in $(CGI_OBJECTS); do sudo cp $$i /usr/lib/cgi-bin/; done
-	@sudo chown www-data:www-data *.cgi
+	@for i in $(CGI_FILES); do sudo cp $$i /usr/lib/cgi-bin/; done
+	@sudo chown www-data:www-data /usr/lib/cgi-bin/*.cgi
+	@echo '-----------------------------------------'
+	@echo 'OVERWRITING WEB APPLICATION:'
+	@for i in $(HTTP_DIRECTORIES); do sudo cp -R $$i /var/www/; done
+	@for i in $(HTTP_FILES); do sudo cp -R $$i /var/www/; done
+	sudo chown -R www-data:www-data /var/www/
 	@echo '#########################################'
 
+#cd ~/AquarPi/code/htdocs
+#sudo cp -R jquery/scheduler/* /var/www/jquery/scheduler/
+#sudo cp -R jquery/* /var/www/jquery/
+#sudo cp -R js/* /var/www/js/
+#sudo cp -R css/* /var/www/css/
+#sudo cp -R images/* /var/www/images/
+#sudo cp -R ico/* /var/www/ico/
+#sudo cp schedule*.html /var/www/
+#sudo cp imageshow.txt /var/www/imageshow.txt
+#sudo cp index.php /var/www/index.php
+#sudo cp languages.xml /var/www/languages.xml
 #	cd ~/AquaPi/code/aquaRequest
 #	sudo cp aquaRequest.cgi /usr/lib/cgi-bin/aquaRequest.cgi
 #	sudo chown www-data:www-data /usr/lib/cgi-bin/aquaRequest.cgi

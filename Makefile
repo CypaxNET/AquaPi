@@ -46,4 +46,5 @@ all: qprojects docu
 
 clean:
 	for i in $(LIST_OF_DOCS); do $(MAKE) clean -C $$i; done
+	for i in $(LIST_OF_QPROJECTS); do $(MAKE) clean -C $$i; done
 

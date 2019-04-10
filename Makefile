@@ -1,5 +1,7 @@
 DOC_ROOT=./docu
 CODE_ROOT=./code
+current_dir = $(PWD)
+
 include makeconfig.mk
 
 DOCU_OUT_DIR=docu_output
@@ -37,14 +39,13 @@ docu:
 qprojects:
 	@echo "--------------"
 	@echo Building Qt projects:
-	@for i in $(LIST_OF_QPROJECTS); do echo " " $$i; done
-	@for i in $(LIST_OF_QPROJECTS); do qmake $$i; done
-	@for i in $(LIST_OF_QPROJECTS); do $(MAKE) -C $$i; done
+	@for i in $(LIST_OF_QPROJECTS); do echo "  Building " $$i && cd $(current_dir) && cd $$i && qmake && make && echo "  --------------"; done
+	@cd $(current_dir)
 	@echo "--------------"
 
 all: qprojects docu
 
 clean:
-	for i in $(LIST_OF_DOCS); do $(MAKE) clean -C $$i; done
-	for i in $(LIST_OF_QPROJECTS); do $(MAKE) clean -C $$i; done
+	@for i in $(LIST_OF_DOCS); do $(MAKE) clean -C $$i; done
+	@for i in $(LIST_OF_QPROJECTS); do $(MAKE) clean -C $$i; done
 

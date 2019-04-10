@@ -64,6 +64,6 @@ install:
 	@sudo chown www-data:www-data $(CGI_TARGET_DIR)/*.cgi
 	@echo '-----------------------------------------'
 	@echo 'OVERWRITING WEB APPLICATION'
-	@for i in $(LIST_OF_HTDOC_DIRS); do echo "Copying " $$i && sudo cp -R $(HTDOC_DIR)/$$i $(WWW_TARGET_DIR)/; done
+	@for i in $(LIST_OF_HTDOC_DIRS); do echo "Copying " $$i && sudo cp -R $$i $(WWW_TARGET_DIR)/; done
 	@sudo chown -R www-data:www-data $(WWW_TARGET_DIR)/
 	@echo '#########################################'

@@ -47,8 +47,10 @@ docu:
 qprojects:
 	@echo '#########################################'
 	@echo Building Qt projects
+	@sudo service aquaBackend stop
 	@for i in $(LIST_OF_QPROJECTS); do echo "Building " $$i && cd $(CURRENT_DIR) && cd $$i && qmake && make && echo '-----------------------------------------'; done
 	@cd $(CURRENT_DIR)
+	@sudo service aquaBackend start
 	@echo '#########################################'
 
 all: qprojects docu

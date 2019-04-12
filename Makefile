@@ -69,4 +69,7 @@ install:
 	@echo '#########################################'
 
 update:
+	@echo '#########################################'
+	@echo 'UPDATEING REPOSITORY'
 	@git pull --recurse-submodules origin develop
+	@echo '#########################################'

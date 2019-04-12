@@ -67,3 +67,6 @@ install:
 	@for i in $(LIST_OF_HTDOC_DIRS); do echo "Copying " $$i && sudo cp -R $$i $(WWW_TARGET_DIR)/; done
 	@sudo chown -R www-data:www-data $(WWW_TARGET_DIR)/
 	@echo '#########################################'
+
+update:
+	@git pull --recurse-submodules origin develop

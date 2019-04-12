@@ -1,0 +1,47 @@
+\subsection{Risk acceptance}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l>{\small}l|c|c|c|c|c|c|}
+		%    \cline{3-8}
+		\hhline{~~------}
+		\multicolumn{2}{l|}{\multirow{2}{*}{}} & \multicolumn{6}{c|}{\textbf{Severity}} \\ %\cline{3-78 
+		\multicolumn{2}{l|}{} & \small{insignificant} &\small{ minor} & \small{moderate} & \small{serious} & \small{critical} & \small{catastrophic} \\ \hline
+		
+		\multicolumn{1}{|c}{\multirow{7}{*}{\textbf{Total probability}}} & $\leq$ 1 : \numprint{10000000} & 
+		\cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} \\ \hhline{|~-------}
+		
+		\multicolumn{1}{|l}{} & $\leq$ 1 : \numprint{1000000} & 
+		\cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+
+		\multicolumn{1}{|l}{} & $\leq$ 1 : \numprint{100000} & 
+		\cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+		
+		\multicolumn{1}{|l}{} & $\leq$ 1 : \numprint{10000} & 
+		\cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+		
+		\multicolumn{1}{|l}{} & $\leq$ 1 : \numprint{1000} & 
+		\cellcolor{colorRiskYellow} & \cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+		
+		\multicolumn{1}{|l}{} & $\leq$ 1 : 100 & 
+		\cellcolor{colorRiskYellow} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hhline{|~-------}
+		
+		\multicolumn{1}{|l}{} & $>$ 1 : 100 & 
+		\cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} & \cellcolor{colorRiskRed} \\ \hline
+		
+	\end{tabular}
+	\caption{Risk acceptance matrix}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \cellcolor{colorRiskRed} ~ \newline ~ \newline \textbf{RISK NOT ACCEPTED} & These risks are generally not accepted. \newline If any residual risk of this kind remains, \ThisProjectName~will not be installed.\\
+    \hline
+    \cellcolor{colorRiskYellow} ~ \newline ~ \newline \textbf{RISK ACCEPTED} & The remaining risks are accepted when the following aspects have been considered:\small\newline
+    - risks have been reduced as much as possible regardless of severity or probability\newline
+    - further risk mitigation measures could not increase the safety of the product \\
+    \hline
+  \end{tabularx}
+\end{table}

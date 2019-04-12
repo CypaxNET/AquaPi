@@ -1,0 +1,12 @@
+[Unit]
+Description=AquaPi Backend Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/home/pi/AquaPi/code/aquaBackend/aquaBackend
+WorkingDirectory=/home/pi/AquaPi/code/aquaBackend
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

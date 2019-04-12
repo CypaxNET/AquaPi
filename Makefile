@@ -47,7 +47,7 @@ docu:
 qprojects:
 	@echo '#########################################'
 	@echo Building Qt projects
-	@for i in $(LIST_OF_QPROJECTS); do echo "Building " $$i && cd $(CURRENT_DIR) && cd $$i && qmake && make && echo '-----------------------------------------' done
+	@for i in $(LIST_OF_QPROJECTS); do echo "Building " $$i && cd $(CURRENT_DIR) && cd $$i && qmake && make && echo '-----------------------------------------'; done
 	@cd $(CURRENT_DIR)
 	@echo '#########################################'
 

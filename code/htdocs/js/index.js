@@ -301,10 +301,10 @@ $(document).one("pageshow","body",function(){
   // switch pumps off for 30 min, everything else back to normal mode
   $("#btn-feeding" ).on( "click", function() {
     console.log("clicked");
-    $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite0|1800,OFF', success:function(data) { console.log("success"); }  });      
+    $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite0|0,OFF', success:function(data) { console.log("success"); }  });      
     $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite1|0,OFF', success:function(data) { console.log("success"); }  });      
-    $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite2|0,OFF', success:function(data) { console.log("success"); }  });      
-    $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite3|1800,OFF', success:function(data) { console.log("success"); }  });      
+    $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite2|600,OFF', success:function(data) { console.log("success"); }  });      
+    $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite3|600,OFF', success:function(data) { console.log("success"); }  });      
     $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite5|0,OFF', success:function(data) { console.log("success"); }  });      
     $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite6|0,OFF', success:function(data) { console.log("success"); }  });      
     $.ajax({ type:'get',  url:'cgi-bin/aquaRequest.cgi?request=setRelayOverwrite7|0,OFF', success:function(data) { console.log("success"); }  });      

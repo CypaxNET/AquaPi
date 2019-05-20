@@ -115,9 +115,9 @@
     </translation>
     
     <translation id="text-0040">
-        <English>Heater</English>
-        <Deutsch>Heizung</Deutsch>
-        <thlIngan_Hol>tujwI'</thlIngan_Hol>
+        <English>Light</English>
+        <Deutsch>Licht</Deutsch>
+        <thlIngan_Hol>wovmoHwI'</thlIngan_Hol>
     </translation>
     
     <translation id="text-0041">
@@ -127,39 +127,39 @@
     </translation>
     
     <translation id="text-0042">
+        <English>Heater</English>
+        <Deutsch>Heizung</Deutsch>
+        <thlIngan_Hol>tujwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0043">
         <English>Stream pump</English>
         <Deutsch>Strömung</Deutsch>
         <thlIngan_Hol>cheqmoHwI'</thlIngan_Hol>
     </translation>
     
-    <translation id="text-0043">
+    <translation id="text-0044">
+        <English>CO2</English>
+        <Deutsch>CO2</Deutsch>
+        <thlIngan_Hol>CO2 SIp</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0045">
         <English>Blubbler</English>
         <Deutsch>Abschäumer</Deutsch>
         <thlIngan_Hol>ba'SuqmoHwI'</thlIngan_Hol>
     </translation>
     
-    <translation id="text-0044">
-        <English>Light</English>
-        <Deutsch>Licht</Deutsch>
-        <thlIngan_Hol>wovmoHwI'</thlIngan_Hol>
-    </translation>
-    
-    <translation id="text-0045">
+    <translation id="text-0046">
         <English>Outlet 1</English>
         <Deutsch>Steckdose 1</Deutsch>
         <thlIngan_Hol>HoS 'och 1</thlIngan_Hol>
     </translation>
     
-    <translation id="text-0046">
+    <translation id="text-0047">
         <English>Outlet 2</English>
         <Deutsch>Steckdose 2</Deutsch>
         <thlIngan_Hol>HoS 'och 2</thlIngan_Hol>
-    </translation>
-    
-    <translation id="text-0047">
-        <English>Outlet 3</English>
-        <Deutsch>Steckdose 3</Deutsch>
-        <thlIngan_Hol>HoS 'och 3</thlIngan_Hol>
     </translation>
     
     <translation id="text-0050">

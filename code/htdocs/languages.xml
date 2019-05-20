@@ -121,15 +121,15 @@
     </translation>
     
     <translation id="text-0041">
-        <English>Filtration pump</English>
-        <Deutsch>Filterpumpe</Deutsch>
-        <thlIngan_Hol>tlhoDbe'wi'</thlIngan_Hol>
-    </translation>
-    
-    <translation id="text-0042">
         <English>Heater</English>
         <Deutsch>Heizung</Deutsch>
         <thlIngan_Hol>tujwI'</thlIngan_Hol>
+    </translation>
+    
+    <translation id="text-0042">
+        <English>Filtration pump</English>
+        <Deutsch>Filterpumpe</Deutsch>
+        <thlIngan_Hol>tlhoDbe'wi'</thlIngan_Hol>
     </translation>
     
     <translation id="text-0043">
@@ -146,7 +146,7 @@
     
     <translation id="text-0045">
         <English>Blubbler</English>
-        <Deutsch>Abschäumer</Deutsch>
+        <Deutsch>Belüftung</Deutsch>
         <thlIngan_Hol>ba'SuqmoHwI'</thlIngan_Hol>
     </translation>
     

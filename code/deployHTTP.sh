@@ -2,7 +2,7 @@
 echo ''
 echo '-----------------------------------------'
 echo 'OVERWRITING WEB APPLICATION'
-cd ~/AquarPi/code/htdocs
+cd ~/AquaPi/code/htdocs
 sudo cp -R jquery/scheduler/* /var/www/jquery/scheduler/
 sudo cp -R jquery/* /var/www/jquery/
 sudo cp -R js/* /var/www/js/

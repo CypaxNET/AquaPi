@@ -1,6 +1,6 @@
 include ../../makeconfig.mk
 
-DOCUMENTS = RiskAnalysis_AquaPi.pdf
+DOCUMENTS = AquaPi_RiskAnalysis.pdf
 
 ifeq ($(OS),Windows_NT)
     ; = ;

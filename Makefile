@@ -47,8 +47,10 @@ docu:
 qprojects:
 	@echo '#########################################'
 	@echo Building Qt projects
-	@for i in $(LIST_OF_QPROJECTS); do echo "  Building " $$i && cd $(CURRENT_DIR) && cd $$i && qmake && make && echo '-----------------------------------------' done
+	@sudo service aquaBackend stop
+	@for i in $(LIST_OF_QPROJECTS); do echo "Building " $$i && cd $(CURRENT_DIR) && cd $$i && qmake && make && echo '-----------------------------------------'; done
 	@cd $(CURRENT_DIR)
+	@sudo service aquaBackend start
 	@echo '#########################################'
 
 all: qprojects docu
@@ -66,4 +68,10 @@ install:
 	@echo 'OVERWRITING WEB APPLICATION'
 	@for i in $(LIST_OF_HTDOC_DIRS); do echo "Copying " $$i && sudo cp -R $$i $(WWW_TARGET_DIR)/; done
 	@sudo chown -R www-data:www-data $(WWW_TARGET_DIR)/
+	@echo '#########################################'
+
+update:
+	@echo '#########################################'
+	@echo 'UPDATING REPOSITORY'
+	@git pull --recurse-submodules origin develop
 	@echo '#########################################'

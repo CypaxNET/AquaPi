@@ -3,7 +3,7 @@ echo ''
 echo '-----------------------------------'
 echo 'Updating repository'
 cd /home/pi/AquaPi
-git pull --recurse-submodules
+git pull --recurse-submodules origin develop
 
 echo ''
 echo '-----------------------------------'

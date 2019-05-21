@@ -1,0 +1,90 @@
+\section{Risk definitions}
+
+\subsection{Severity}
+Concerning risk severity it has to taken into account that \ThisProjectName~ controls an aquarium and risks therefore may apply to 
+\begin{itemize}
+  \item persons -- user(s) and third party persons,
+  \item animals -- inside the aquarium,
+  \item material values -- e.g. the aquarium itself, aquarium devices, environment, \dots.
+\end{itemize}
+
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{Severity} & \textbf{Definition} \\
+    \hline
+    \textbf{insignificant} & Persons: Inconvenience or temporary discomfort. \newline
+    Animals: Self-healing injury or impairment. \newline
+    Material values: Loss of value \textless{} 1 \euro. \\
+    \hline
+    \textbf{minor} & Persons: Injury or impairment not requiring medical intervention. \newline
+    Animals: Irreversible injury or impairment.\newline
+    Material values: Loss of value \textgreater= 1 \euro{} .. \textless{} 10 \euro. \\
+    \hline
+    \textbf{moderate} & Persons: Injury or impairment requiring medical intervention. \newline
+    Animals: Death of one animal. \newline
+    Material values: Loss of value \textgreater= 10 \euro{} .. \textless{} 100 \euro. \\
+    \hline
+    \textbf{serious} & Persons: Injury or impairment requiring professional medical intervention. \newline
+    Animals: Death of several animals. \newline
+    Material values: Loss of value \textgreater= 100 \euro. \\
+    \hline
+    \textbf{critical} & Persons: Permanent impairment or life-threatening injury. \\
+    \hline
+    \textbf{catastrophic} & Persons: Death.\\
+    \hline
+  \end{tabularx}
+  \caption{Definition of risk severities}
+\end{table}
+
+
+\subsection{Probability}
+
+\subsubsection{Probability that a hazardous situation occurs}
+
+\ThisProjectName~ controls various aquarium devices by activating/deactivating relay switches following user configurable schedules.\\
+It is reasonable to assume that any aquarium device is activated once and deactivated once per day.
+
+Since 8 relays can be controlled, plus possibly a few further devices controlled using PWM or GPIO outputs of the Raspberry Pi, it is assumed that \NumRiskRelatedActionsPerDay~\textit{risk related actions} per day will be performed.\\
+In \NumYearsLifeTime~ years of expected device lifetime that makes a total of \FPeval{\result}{clip(\NumYearsLifeTime * 365 * \NumRiskRelatedActionsPerDay)}\numprint{\result}~actions.
+
+The graduation of risk probabilities is chosen such way, that a \textit{inconceivable} risk clearly will not occur during the expected device time while a \textit{frequently} risk will occur once a day.
+
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{|l|X|X|X|}
+    \hline
+	\textbf{Probability} & \textbf{Probability per action} & \textbf{Occurrences per lifetime and device} &
+	\textbf{Statistically mean time between occurrence (days)} \\
+    \hline
+	\PrintInnerProbabilityRow{inconceivable}{$\leq$}
+	\PrintInnerProbabilityRow{exceptionally}{$\leq$}
+	\PrintInnerProbabilityRow{rarely}{$\leq$}
+	\PrintInnerProbabilityRow{occasionally}{$\leq$}
+	\PrintInnerProbabilityRow{probably}{$\leq$}
+	\PrintInnerProbabilityRow{frequently}{$\leq$}
+	\PrintInnerProbabilityRow{regularly}{$\leq$}
+  \end{tabularx}
+  \caption{Definition of risk probabilities (inner sequence of events)}
+\end{table}
+
+Parameters used for calculation:
+\begin{itemize}
+	\item \NumRiskRelatedActionsPerDay~risk related actions per day
+	\item \NumYearsLifeTime~years device lifetime
+\end{itemize}
+
+\subsubsection{Probability that a hazardous situation results in a harm}
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{|l|X|}
+		\hline
+		\textbf{Probability} & \textbf{Probability of harm} \\
+		\hline
+		\PrintOuterProbabilityRow{exceptionally}{$\leq$}
+		\PrintOuterProbabilityRow{rarely}{$\leq$}
+		\PrintOuterProbabilityRow{occasionally}{$\leq$}
+		\PrintOuterProbabilityRow{sometimes}{$\leq$}
+		\PrintOuterProbabilityRow{most likely}{$\leq$}
+		\PrintOuterProbabilityRow{always}{$\leq$}
+	\end{tabularx}
+	\caption{Definition of risk probabilities (outer sequence of events)}
+\end{table}

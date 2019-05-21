@@ -182,7 +182,7 @@ void BackendServer::handleReceive(void)
     clientRequest = clientRequest.trimmed();
 
     QString s = (pSocket->peerAddress().toString() + ":" + QString::number(pSocket->peerPort())) + "  " + clientRequest;
-    QDEBUG << "received request" << s;
+    //QDEBUG << "received request" << s;
 
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);

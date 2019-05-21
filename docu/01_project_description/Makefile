@@ -1,6 +1,6 @@
 include ../../makeconfig.mk
 
-DOCUMENTS = ProjectDescription_AquaPi.pdf
+DOCUMENTS = AquaPi_ProjectDescription.pdf
 
 ifeq ($(OS),Windows_NT)
     ; = ;

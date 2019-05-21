@@ -66,7 +66,7 @@ ClientRequest::ClientRequest(long lPort, QString strRequest)
 
 #ifdef Q_OS_WIN
 #warning "WARNING: FIT is active!"
-  m_pSocket->connectToHost("10.0.80.10", lPort);
+  m_pSocket->connectToHost("127.0.0.1", lPort);
 #else
   m_pSocket->connectToHost("localhost", lPort);
 #endif

@@ -140,6 +140,8 @@ void BackendServer::handleDisconnectSocket()
         //QDEBUG << "disconnecting from" << s;
         pSocket->close();
         m_ListOfSockets.removeOne(pSocket);
+        pSocket->deleteLater();
+        //QDEBUG << "number of sockets now " << m_ListOfSockets.count();
         break;
       }
     }

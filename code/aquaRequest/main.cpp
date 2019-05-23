@@ -153,8 +153,8 @@ int main(int argc, char *argv[])
   char* cpQuery = getenv("QUERY_STRING");
 
 #ifdef Q_OS_WIN
-#warning "WARNING: FIT is active!"
-  cpQuery = (char*)"request=getStatus";
+  //#warning "WARNING: FIT is active!"
+  //cpQuery = (char*)"request=getStatus";
   //cpQuery = (char*)"request=setRelayOverwrite6|30,OFF";
   //cpQuery = (char*)"request=getRelayState0";
   //cpQuery = (char*)"request=setRelayMode2|SCHEDULE";

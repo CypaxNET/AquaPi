@@ -22,7 +22,7 @@ def main():
   logging.info('Blinkt! HSV control')
   logging.info('Version ' + scriptVersion)
 
-  #blinkt.set_clear_on_exit()
+  blinkt.set_clear_on_exit(False)
   blinkt.set_brightness(0.1)
   
   # construct the argument parser and parse the arguments
@@ -37,8 +37,8 @@ def main():
   VOL = args["val"]
 
   r, g, b = [int(c * 255.0) for c in colorsys.hsv_to_rgb(float(HUE), float(SAT), float(VOL))]
-  for x in range(blinkt.NUM_PIXELS):
-    blinkt.set_pixel(x, r, g, b)
+  
+  blinkt.set_all(r, g, b)
 
   blinkt.show()
   

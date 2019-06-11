@@ -13,7 +13,7 @@ import logging
 
 # CONSTANTS ###################################################################
 # The following elements must not be altered during script execution
-scriptVersion = '1.0.0.2'
+scriptVersion = '1.0.0.3'
 
 def main():
   global scriptVersion
@@ -36,9 +36,9 @@ def main():
   SAT = args["sat"]
   VOL = args["val"]
 
-  r, g, b = [int(c * 255) for c in colorsys.hsv_to_rgb(HUE, SAT, VOL)]
+  r, g, b = [int(c * 255.0) for c in colorsys.hsv_to_rgb(HUE, SAT, VOL)]
   for x in range(blinkt.NUM_PIXELS):
-    blinkt.set_pixel(x, int(round(r)), int(round(g)), int(round(b)))
+    blinkt.set_pixel(x, r, g, b)
 
   blinkt.show()
   

@@ -23,7 +23,7 @@ def main():
   logging.info('Version ' + scriptVersion)
 
   blinkt.set_clear_on_exit(False)
-  blinkt.set_brightness(0.1)
+  blinkt.set_brightness(0.05)
   
   # construct the argument parser and parse the arguments
   thisArgumentParser = argparse.ArgumentParser()

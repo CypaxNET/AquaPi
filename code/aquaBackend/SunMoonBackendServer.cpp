@@ -171,7 +171,12 @@ void SunMoonBackendServer::handleReceive(void)
             double moonBrightness = 0.0;
             if (false != isShining)
             {
-              moonBrightness = fraction * altitude;
+              double moonAltitudeFactor = altitude;
+              moonAltitudeFactor = qMax(0.0, moonAltitudeFactor);
+              moonAltitudeFactor = qMin(90.0, moonAltitudeFactor);
+              moonAltitudeFactor = (moonAltitudeFactor / 90.0);
+
+              moonBrightness = fraction * moonAltitudeFactor;
             }
             QString strCommand = "python blinktLED.py -val ";
             strCommand.append(QString::number(moonBrightness));

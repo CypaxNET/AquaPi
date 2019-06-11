@@ -13,7 +13,7 @@ import logging
 
 # CONSTANTS ###################################################################
 # The following elements must not be altered during script execution
-scriptVersion = '1.0.0.0'
+scriptVersion = '1.0.0.1'
 
 def main():
   global scriptVersion
@@ -27,9 +27,9 @@ def main():
   
   # construct the argument parser and parse the arguments
   thisArgumentParser = argparse.ArgumentParser()
-  thisArgumentParser.add_argument("-h", "--hue", required = False, help = "Hue",        default="0.55")
-  thisArgumentParser.add_argument("-s", "--sat", required = False, help = "Saturation", default="1.0")
-  thisArgumentParser.add_argument("-v", "--val", required = False, help = "Value",      default="1.0")
+  thisArgumentParser.add_argument("-hue", "--hue", required = False, help = "Hue",        default="0.55")
+  thisArgumentParser.add_argument("-sat", "--sat", required = False, help = "Saturation", default="1.0")
+  thisArgumentParser.add_argument("-val", "--val", required = False, help = "Value",      default="1.0")
   args = vars(thisArgumentParser.parse_args())
 
   HUE = args["hue"]

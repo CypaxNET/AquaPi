@@ -173,7 +173,7 @@ void SunMoonBackendServer::handleReceive(void)
             {
               moonBrightness = fraction * altitude;
             }
-            QString strCommand = "python blinktLED.py -v ";
+            QString strCommand = "python blinktLED.py -val ";
             strCommand.append(QString::number(moonBrightness));
             QDEBUG << "Moon brightness:" << strCommand;
             system(strCommand.toLatin1());

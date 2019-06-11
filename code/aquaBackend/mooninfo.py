@@ -29,7 +29,7 @@ DEFAULT_LON = "7,51,0"
 
 # CONSTANTS ###################################################################
 # The following elements must not be altered during script execution
-scriptVersion = '1.0.0.1'
+scriptVersion = '1.0.0.2'
 
 def main():
   global scriptVersion
@@ -47,7 +47,7 @@ def main():
   thisArgumentParser = argparse.ArgumentParser()
   thisArgumentParser.add_argument("-n", "--lat",   required = False,    help = "Latitude",  default=DEFAULT_LAT)
   thisArgumentParser.add_argument("-e", "--lon",   required = False,    help = "Longitude", default=DEFAULT_LON)
-  thisArgumentParser.add_argument("-d", "--debug", action='store_true', help = "Debug output")
+  thisArgumentParser.add_argument("-d", "--debug", action='store_true')
   args = vars(thisArgumentParser.parse_args())
   doDebugPrint = args["debug"]
   latStr = args["lat"]

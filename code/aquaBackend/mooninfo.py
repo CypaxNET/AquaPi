@@ -15,8 +15,8 @@ import socket
 #https://www.timeanddate.de/mond/deutschland/freiburg
 
 #Freiburg, Germany
-DEFAULT_LAT = "47,59,41.38"
-DEFAULT_LON = "7,50,59.57"
+DEFAULT_LAT = "48,00,0"
+DEFAULT_LON = "7,51,0"
 
 # Kerala, India
 #DEFAULT_LAT = "22,51,0"
@@ -29,19 +29,19 @@ DEFAULT_LON = "7,50,59.57"
 
 # CONSTANTS ###################################################################
 # The following elements must not be altered during script execution
-scriptVersion = '1.0.0.0'
+scriptVersion = '1.0.0.1'
 
 def main():
   global scriptVersion
 
   doDebugPrint = False
   
-  mooninfo = dict()
+  mooninfoDict = dict()
 
   logging.basicConfig(level=logging.DEBUG, format='  %(levelname)s: %(message)s')
   logging.info('Moon Info Script')
   logging.info('Version ' + scriptVersion)
-  mooninfo["version"] = scriptVersion
+  mooninfoDict["version"] = scriptVersion
 
   # construct the argument parser and parse the arguments
   thisArgumentParser = argparse.ArgumentParser()
@@ -60,46 +60,51 @@ def main():
 
   if doDebugPrint:
     print("Now: " + str(now) + " UTC")
-  mooninfo["datetime"] = str(now)
+  mooninfoDict["datetime"] = str(now)
 
   mi = pylunar.MoonInfo(lat, lon)
   mi.update((now.year, now.month, now.day, now.hour, now.minute, now.second))
-  mooninfo["fraction"] = str(mi.fractional_phase())
-  mooninfo["altitude"] = str(mi.fractional_phase())
-  mooninfo["azimuth"] = str(mi.fractional_phase())
+  mooninfoDict["fraction"] = str(mi.fractional_phase())
+  mooninfoDict["altitude"] = str(mi.altitude())
+  mooninfoDict["azimuth"] = str(mi.azimuth())
   if doDebugPrint:
     print("Fractional phase: %.4f" % mi.fractional_phase())
-  if doDebugPrint:
     print("Altitude: %.4f°" % mi.altitude())
-  if doDebugPrint:
     print("Azimuth %.4f°" % mi.azimuth())
   
+  moon_rise_time = now.replace(hour=0,minute=0,second=0,microsecond=0)
+  moon_set_time = now.replace(hour=23,minute=59,second=59,microsecond=999999)
+  
   rise_set_times = mi.rise_set_times(time.tzname[time.daylight])
-  moon_rise_time = rise_set_times[0][1]
-  moon_set_time = rise_set_times[2][1]
+  for timeInfo in rise_set_times:
+    timeID = timeInfo[0]
+    if ("rise" == timeID):
+      moon_rise_time = timeInfo[1]
+    elif ("set" == timeID):
+      moon_set_time = timeInfo[1]
 
   if (type(moon_rise_time) is str):
     if doDebugPrint:
       print("Moon does not rise today")
-    moon_rise_time = now.replace(hour=0,minute=0,second=0,microsecond=0)
-    mooninfo["doesrise"] = "False"
+    mooninfoDict["doesrise"] = "False"
   else:
     moon_rise_time = now.replace(hour=int(moon_rise_time[3]),minute=int(moon_rise_time[4]),second=int(moon_rise_time[5]),microsecond=0)
-    mooninfo["doesrise"] = "True"
+    mooninfoDict["doesrise"] = "True"
+  
   if (type(moon_set_time) is str):
     if doDebugPrint:
       print("Moon does not set today")
-    mooninfo["doesset"] = "False"
-    moon_set_time = now.replace(hour=23,minute=59,second=59,microsecond=999999)
+    mooninfoDict["doesset"] = "False"
   else:
     moon_set_time = now.replace(hour=int(moon_set_time[3]),minute=int(moon_set_time[4]),second=int(moon_set_time[5]),microsecond=0)
-    mooninfo["doesset"] = "True"
+    mooninfoDict["doesset"] = "True"
+  
   if doDebugPrint:
     print("Rise time: " + str(moon_rise_time) + " UTC")
-  if doDebugPrint:
     print("Set time:  " + str(moon_set_time) + " UTC")
-  mooninfo["rise"] = str(moon_rise_time)
-  mooninfo["set"] = str(moon_set_time)
+
+  mooninfoDict["rise"] = str(moon_rise_time)
+  mooninfoDict["set"] = str(moon_set_time)
 
   moonIlluminationFactor = mi.fractional_phase()
   moonIlluminationFactor = max(0.0, moonIlluminationFactor)
@@ -123,23 +128,23 @@ def main():
       isMoonShine = True
 
   if(isMoonShine):
-    mooninfo["shining"] = "True"
+    mooninfoDict["shining"] = "True"
     if doDebugPrint:
       print("Moon is shining (%.4f%%)" % (100.0 * moonIlluminationFactor * moonAltitudeFactor))
   else:
-    mooninfo["shining"] = "False"
-    mooninfo["value"] = "0.0"
+    mooninfoDict["shining"] = "False"
+    mooninfoDict["value"] = "0.0"
     if doDebugPrint:
       print("Moon is NOT shining")
 
   if doDebugPrint:
-    for keystr in mooninfo:
-      print(keystr + " = " + str(mooninfo[keystr]))
+    for keystr in mooninfoDict:
+      print(keystr + " = " + str(mooninfoDict[keystr]))
 
   TCP_IP = 'localhost'
   TCP_PORT = 58237
   BUFFER_SIZE = 1000
-  MESSAGE = str(mooninfo)
+  MESSAGE = str(mooninfoDict)
 
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
   s.connect((TCP_IP, TCP_PORT))

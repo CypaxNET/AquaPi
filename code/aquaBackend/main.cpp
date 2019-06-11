@@ -27,7 +27,8 @@
 /**********************************************************************************************************************/
 /* Own Includes                                                                                                       */
 /**********************************************************************************************************************/
-#include "BackendServer.h"
+#include "GuiBackendServer.h"
+#include "SunMoonBackendServer.h"
 
 /**********************************************************************************************************************/
 /* Defines                                                                                                            */
@@ -40,9 +41,11 @@
 #endif
 
 #define MIN_ARGC_VALUE    1
-#define ARG_PORT          "-p"
+#define ARG_GUI_PORT      "-gp"
+#define ARG_MOON_PORT     "-mp"
 #define ARG_USAGE         "-?"
-#define DEFAULT_TCP_PORT  (long)58236
+#define DEFAULT_GUI_PORT  (long)58236
+#define DEFAULT_MOON_PORT (long)58237
 #define MIN_PORT_VALUE    (long)1024
 #define MAX_PORT_VALUE    (long)65535
 
@@ -78,8 +81,9 @@ enum iProgramExitCodes
 void printUsage(void)
 {
   QDEBUG << "USAGE:\n"
-         "[-p <port>] [-h <host>] [-v] [-?]\n"
-         "  -p <port>     Defines the listening port of the backend. (default: 58236)\n"
+         "[-gp <port>] [-mp <port>] [-h <host>] [-v] [-?]\n"
+         "  -gp <port>    Defines the GUI listening port of the backend. (default: 58236)\n"
+         "  -mp <port>    Defines the moon info listening port of the backend. (default: 58237)\n"
          "  -?            This help text.\n"
          ;
 }
@@ -99,7 +103,8 @@ int main(int argc, char *argv[])
   QCoreApplication coreApp(argc, argv);
 
   // Variables to store arguments passed to program
-  long lPort = DEFAULT_TCP_PORT;
+  long lGuiPort = DEFAULT_GUI_PORT;
+  long lMoonPort = DEFAULT_MOON_PORT;
 
   // Read arguments and use them to configure the program
   if (1 < argc)
@@ -111,14 +116,33 @@ int main(int argc, char *argv[])
         printUsage();
         return iProgramExitSuccess;
       }
-      else if (0 == strcmp(ARG_PORT, argv[i]))
+      else if (0 == strcmp(ARG_GUI_PORT, argv[i]))
       {
         // If port configuration argument was passed, there must be a port no. following
         if (i < (argc -1))
         {
           i++;
-          lPort = strtol(argv[i], 0, 10);
-          if (lPort < MIN_PORT_VALUE || lPort > MAX_PORT_VALUE)
+          lGuiPort = strtol(argv[i], 0, 10);
+          if (lGuiPort < MIN_PORT_VALUE || lGuiPort > MAX_PORT_VALUE)
+          {
+            printUsage();
+            return iProgramArgPortWithInvalidNo;
+          }
+        }
+        else
+        {
+          printUsage();
+          return iProgramArgPortWithoutNumber;
+        }
+      }
+      else if (0 == strcmp(ARG_MOON_PORT, argv[i]))
+      {
+        // If port configuration argument was passed, there must be a port no. following
+        if (i < (argc -1))
+        {
+          i++;
+          lMoonPort = strtol(argv[i], 0, 10);
+          if (lMoonPort < MIN_PORT_VALUE || lMoonPort > MAX_PORT_VALUE)
           {
             printUsage();
             return iProgramArgPortWithInvalidNo;
@@ -138,10 +162,11 @@ int main(int argc, char *argv[])
     }
   }
 
-  BackendServer backendServer(lPort);
+  GuiBackendServer guiBackendServer(lGuiPort);
+  SunMoonBackendServer sunmoonBackendServer(lMoonPort);
 
-  // exit application when server receives terminate request
-  coreApp.connect(&backendServer, SIGNAL(signalTerminate()), &coreApp, SLOT(quit()));
+  // exit application when GUI server receives terminate request
+  coreApp.connect(&guiBackendServer, SIGNAL(signalTerminate()), &coreApp, SLOT(quit()));
 
   int retVal = coreApp.exec();
   QDEBUG << "Exit with code" << retVal;

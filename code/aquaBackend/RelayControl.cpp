@@ -518,7 +518,7 @@ void RelayControl::setGPIO(int relay, RELAYCONTROL_STATES_ENUM eState) const
 
     if (UNSET_GPIO == m_Relays[relay].iGPIO)
     {
-      QDEBUG << "Warning: no GPIO assigned to relay" << relay;
+      //QDEBUG << "Warning: no GPIO assigned to relay" << relay;
       return;
     }
 

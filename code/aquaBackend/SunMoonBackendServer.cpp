@@ -21,12 +21,17 @@
 /**********************************************************************************************************************/
 #include <QtDebug>
 #include <QDataStream>
-#include <QRegExp>
+#include <QMap>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QTimer>
+#include <QDateTime>
 
 /**********************************************************************************************************************/
 /* Own includes                                                                                                       */
 /**********************************************************************************************************************/
-#include "BackendServer.h"
+#include "SunMoonBackendServer.h"
 
 /**********************************************************************************************************************/
 /* Namespaces                                                                                                         */
@@ -35,34 +40,27 @@
 /**********************************************************************************************************************/
 /* Constants (#define)                                                                                                */
 /*******************************************************************************//*!@addtogroup define Constants*//*@{*/
-#define DEBUG_BACKENDSERVER 0
-#if DEBUG_BACKENDSERVER
+#define DEBUG_SUNMOONBACKENDSERVER 1
+#if DEBUG_SUNMOONBACKENDSERVER
 #define QDEBUG qDebug()<<__func__<<"()\t"
 #else
 #define QDEBUG if (0) qDebug()
 #endif
+
+const char* MOONINFOCOMMAND = "python mooninfo.py";
+
 /***** End of: define Constants *********************************************************************************//*@}*/
 
 /**********************************************************************************************************************/
 /* Constructors                                                                                                       */
 /**************************************************************************//*!@addtogroup constrc Constructors *//*@{*/
-BackendServer::BackendServer(long lPort)
+SunMoonBackendServer::SunMoonBackendServer(long lPort) : BackendServer(lPort)
 {
-  QDEBUG << "Starting backend server";
-
-  this->m_pServer = new QTcpServer(this);
-
-  if (Q_NULLPTR != m_pServer)
-  {
-    connect(m_pServer, SIGNAL(newConnection()), SLOT(handleNewConnection()));
-
-    m_pServer->listen(QHostAddress::Any, (quint16)lPort);
-    QDEBUG << "Listening on" << m_pServer->serverAddress() << "at port" << m_pServer->serverPort();
-  }
-  else
-  {
-    QDEBUG << "Failed to set up TCP server.";
-  }
+  QDEBUG << "Starting sun/moon backend server";
+  m_Timer.setInterval(1000);
+  m_Timer.setSingleShot(false);
+  QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(requestMoonInfo()));
+  m_Timer.start();
 }
 
 /***** End of: constrc Constructors *****************************************************************************//*@}*/
@@ -70,23 +68,6 @@ BackendServer::BackendServer(long lPort)
 /**********************************************************************************************************************/
 /* Deconstructor                                                                                                      */
 /**********************************************************************//*!@addtogroup deconstrc Deconstructors *//*@{*/
-BackendServer::~BackendServer()
-{
-  if (Q_NULLPTR != m_pServer)
-  {
-    // close all sockets
-    foreach (QTcpSocket* pListSocket, m_ListOfSockets)
-    {
-      QString s = (pListSocket->peerAddress().toString() + ":" + QString::number(pListSocket->peerPort()));
-      QDEBUG << "disconnecting from" << s;
-      pListSocket->close();
-      m_ListOfSockets.removeOne(pListSocket);
-    }
-
-    m_pServer->close();
-    delete m_pServer;
-  }
-}
 /***** End of: deconstrc Constructors ***************************************************************************//*@}*/
 
 /**********************************************************************************************************************/
@@ -112,44 +93,113 @@ BackendServer::~BackendServer()
 /**********************************************************************************************************************/
 /* Protected slots                                                                                                    */
 /*************************************************************//*!@addtogroup protslots Protected slots         *//*@{*/
-void BackendServer::handleNewConnection(void)
-{
-  while (m_pServer->hasPendingConnections())
-  {
-    QTcpSocket* pSocket = m_pServer->nextPendingConnection();
-    connect(pSocket, SIGNAL(readyRead()),    this, SLOT(handleReceive()));
-    connect(pSocket, SIGNAL(disconnected()), this, SLOT(handleDisconnectSocket()));
-
-    m_ListOfSockets.append(pSocket);
-
-    QString s = (m_ListOfSockets.last()->peerAddress().toString() + ":" + QString::number(m_ListOfSockets.last()->peerPort()));
-    QDEBUG << "new connection with" << s;
-  }
-}
-
-void BackendServer::handleDisconnectSocket()
+void SunMoonBackendServer::handleReceive(void)
 {
   QTcpSocket* pSocket = qobject_cast<QTcpSocket*>(sender());
   if (Q_NULLPTR != pSocket)
   {
-    // search in list for this socket
-    foreach (QTcpSocket* pListSocket, m_ListOfSockets)
+    QString socketString = pSocket->readAll();
+    //QDEBUG << socketString;
+    socketString = socketString.replace('\'', '"');
+    QJsonDocument jsondoc = QJsonDocument::fromJson(socketString.toUtf8());
+    QJsonObject jsonobj;
+
+    // check validity of the document
+    if(!jsondoc.isNull())
     {
-      if (pListSocket == pSocket)
-      {
-        QString s = (pSocket->peerAddress().toString() + ":" + QString::number(pSocket->peerPort()));
-        QDEBUG << "disconnecting from" << s;
-        pSocket->close();
-        m_ListOfSockets.removeOne(pSocket);
-        pSocket->deleteLater();
-        //QDEBUG << "number of sockets now " << m_ListOfSockets.count();
-        break;
-      }
+        if(jsondoc.isObject())
+        {
+            bool convResult = false;
+            double doubleValue;
+
+            double fraction = 1.0;
+            double altitude = 1.0;
+            QDateTime riseTime;
+            QDateTime setTime;
+            bool isShining = false;
+
+            jsonobj = jsondoc.object();
+            //QDEBUG << "keys:" << jsonobj.keys();
+
+            // obtain moon fractional brightness
+            if (jsonobj.contains("fraction"))
+            {
+              QJsonValue jvFraction = jsonobj.value("fraction");
+              QString strFraction = jvFraction.toString();
+              doubleValue = strFraction.toDouble(&convResult);
+              if (false != convResult) fraction = doubleValue;
+            }
+
+            // obtain moon alitude
+            if (jsonobj.contains("altitude"))
+            {
+              QJsonValue jvAltitude = jsonobj.value("altitude");
+              QString strAltitude = jvAltitude.toString();
+              doubleValue = strAltitude.toDouble(&convResult);
+              if (false != convResult) altitude = doubleValue;
+            }
+
+            // obtain moon rise time
+            if (jsonobj.contains("rise"))
+            {
+              QJsonValue jvRiseTime = jsonobj.value("rise");
+              QString strRiseTime = jvRiseTime.toString();
+              riseTime = QDateTime::fromString(strRiseTime, "yyyy-MM-dd HH:mm:ss");
+              riseTime.setTimeSpec(Qt::UTC);
+            }
+
+            // obtain moon set time
+            if (jsonobj.contains("set"))
+            {
+              QJsonValue jvSetTime = jsonobj.value("set");
+              QString strSetTime = jvSetTime.toString();
+              setTime = QDateTime::fromString(strSetTime, "yyyy-MM-dd HH:mm:ss");
+              setTime.setTimeSpec(Qt::UTC);
+            }
+
+            // obtain moon is shining
+            if (jsonobj.contains("shining"))
+            {
+              QJsonValue jvIsShining = jsonobj.value("shining");
+              QString strIsShining = jvIsShining.toString();
+              if("True" == strIsShining)
+              {
+                isShining = true;
+              }
+            }
+
+            double moonBrightness = 0.0;
+            if (false != isShining)
+            {
+              moonBrightness = fraction * altitude;
+            }
+            QString strCommand = "python blinktLED.py -v ";
+            strCommand.append(QString::number(moonBrightness));
+            QDEBUG << "Moon brightness:" << strCommand;
+            system(strCommand.toLatin1());
+        }
+        else
+        {
+            QDEBUG << "ERROR: received JSON data is not an object";
+        }
+    }
+    else
+    {
+        QDEBUG << "ERROR: received data is invalid JSON";
     }
   }
   else
   {
-    // nothing to do here, cannot disconnect from null pointer
+    QDEBUG << "ERROR: receive from null pointer";
+  }
+}
+
+void SunMoonBackendServer::requestMoonInfo(void)
+{
+  int retCode = system(MOONINFOCOMMAND);
+  if (retCode != 0)
+  {
+    QDEBUG << "ERROR" << MOONINFOCOMMAND << "returned with code" << retCode;
   }
 }
 

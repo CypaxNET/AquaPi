@@ -89,6 +89,8 @@ function updateRelayState() {
       var array = data.split("|", 10);
       
       if (array.length < 10) {
+        console.log("Received data too short: "+data);
+        /*
         $(".img-outlet-state0").attr("src", "images/icons-svg/delete-red.svg");
         $(".img-outlet-state1").attr("src", "images/icons-svg/delete-red.svg");
         $(".img-outlet-state2").attr("src", "images/icons-svg/delete-red.svg");
@@ -99,6 +101,7 @@ function updateRelayState() {
         $(".img-outlet-state7").attr("src", "images/icons-svg/delete-red.svg");
         $('.aquarium-value').html("???");
         $('.aquarium-status-datetime').html("???");
+        */
       }
       else
       {
